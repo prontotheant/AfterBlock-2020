@@ -1,267 +1,367 @@
-#  Alex Patterson
-#  AfterBlock - Create a world for your novel (Like pick your own adventure for idea inspiration)
+import re
 
-
-# import os (Unused for now)
-
-# from PIL import Image, ImageDraw, ImageFont (Unused for now)
-
+"""__author__ Alex Patterson"""
+""" AfterBlock - Create a world for your novel (Like pick your own adventure for idea inspiration) """
 print("Thank you for using AfterBlock for your novel needs!")
 
-#  Repeated phrases "dictionary" to reduce line length
+# Reduce Line Length
+scale1 = "On a scale of 1 - 5, please rate "
+scale2 = " with 1 being "
+scale3 = " and 5 being "
+#
+title = ""
 
-scale1 = "On a scale of 1-10, 1 being"  # On a scale - phrase to reduce line length
-percentage1 = "What percentage of the"  # Percentage - phrase to reduce line length
-percentage2 = "[Please enter in decimal format]"  # Decimal - phrase to reduce line length
-between1 = "[Please enter a number between 1-"
-greater1 = "[Please do not enter a number greater than "
+print("Please enter a name with no spaces.")
+titleverify = 0
+while titleverify == 0:
+    title = input("What is the name of your civilization: ")
+    if re.findall('[!@#%&*?>< ]', title):
+        print("There was an issue with your name, Please try again.")
+    else:
+        titleverify = 2
 
-# Text Repository
-
-# Repository for culture text
-
-# CULTURE 1 stoic
-C11 = "people are of average height with beautiful tan skin, the most common hair colors\n"
-C12 = "are dark chocolate brown and black. They value control and perceive emotional outbursts as shameful.\n"
-C13 = "They are godless but honor their elders, and have some spirituality with their ancestors.\n"
-C14 = "Their clothes are simple but very good quality and are often dyed deep jewel tones when they are not dyed black."
-C15 = "\nThey do not discriminate between genders but women are often seen as more respectable due to their control\n"
-C16 = "of their emotions, they also acknowledge those outside of the binary and offer them great respect.\n"
-C17 = "Family oriented, the country is an excellent producer of delicate workmanship and machinery.\n"
-C18 = "Their countryside is rocky and densely forested.\n"
-C1 = C11 + C12 + C13 + C14 + C15 + C16 + C17 + C18
-# The + operator when used with strings combines them with no spaces a + b = ab
-
-# CULTURE 2 sparta
-C21 = "people are above average height, the most common hair colors are golden and dark brown.\n"
-C22 = "They value athleticism and have strong bonds between friends. They have many gods, but the\n"
-C23 = "most called upon is the god of revelry. Their clothes are revealing, and they often wear gaudy\n"
-C24 = "and elaborate jewelry. Everyone is taught to fight, however men are expected to belong to a\n"
-C25 = "mercenary military group, and women are to handle negotiations and money. A matriarchy, these\n"
-C26 = "people have wealth from shrewd planning and domination of other countries, they are also highly\n"
-C27 = "relied upon for trade. Their countryside is flat and hot, but also hosts the most precious flowers.\n"
-C2 = C21 + C22 + C23 + C24 + C25 + C26 + C27
-
-# CULTURE 3 artistic masters
-C31 = "not written quite yet\n"
-C32 = "not written quite yet\n"
-C33 = "not written quite yet\n"
-C34 = "not written quite yet\n"
-C35 = "not written quite yet\n"
-C36 = "not written quite yet\n"
-C37 = "not written quite yet\n"
-C3 = C31 + C31 + C33 + C34 + C35 + C36 + C37
-
-# CULTURE 4 forest based
-C41 = "not written quite yet\n"
-C42 = "not written quite yet\n"
-C43 = "not written quite yet\n"
-C44 = "not written quite yet\n"
-C45 = "not written quite yet\n"
-C46 = "not written quite yet\n"
-C47 = "not written quite yet\n"
-C4 = C41 + C42 + C43 + C44 + C45 + C46 + C47
-
-# CULTURE 5 water based
-C51 = "not written quite yet\n"
-C52 = "not written quite yet\n"
-C53 = "not written quite yet\n"
-C54 = "not written quite yet\n"
-C55 = "not written quite yet\n"
-C56 = "not written quite yet\n"
-C57 = "not written quite yet\n"
-C5 = C51 + C52 + C53 + C54 + C55 + C56 + C57
-
-# CULTURE 6 weird white people
-C61 = "not written quite yet\n"
-C62 = "not written quite yet\n"
-C63 = "not written quite yet\n"
-C64 = "not written quite yet\n"
-C65 = "not written quite yet\n"
-C66 = "not written quite yet\n"
-C67 = "not written quite yet\n"
-C6 = C61 + C62 + C63 + C64 + C65 + C66 + C67
-
-# CULTURE 7 giants
-C71 = "not written quite yet\n"
-C72 = "not written quite yet\n"
-C73 = "not written quite yet\n"
-C74 = "not written quite yet\n"
-C75 = "not written quite yet\n"
-C76 = "not written quite yet\n"
-C77 = "not written quite yet\n"
-C7 = C71 + C72 + C73 + C74 + C75 + C76 + C77
-
-# CULTURE 8 pygmies
-C81 = "not written quite yet\n"
-C82 = "not written quite yet\n"
-C83 = "not written quite yet\n"
-C84 = "not written quite yet\n"
-C85 = "not written quite yet\n"
-C86 = "not written quite yet\n"
-C87 = "not written quite yet\n"
-C8 = C81 + C82 + C83 + C84 + C85 + C86 + C87
-
-# Repository for god text
-
-G11 = "GOD OF A SAFE HOME"
-G1 = G11
-
-G21 = "GOD OF LAUGHTER AND DELIGHT (REVELRY)"
-G2 = G21
-
-G31 = "GOD OF WINE AND THE HARVEST"
-G3 = G31
-
-G41 = "GOD OF CHARM AND WICKEDNESS"
-G4 = G41
-
-G51 = "GOD OF JUSTICE"
-G5 = G51
-
-G61 = "PROTECTOR OF THE SOFT"
-G6 = G61
-
-G71 = "GOD OF THE PLANETS AND THE SKY"
-G7 = G71
-
-G81 = "ONE GOD"
-G8 = G81
-
-# User input section
-
-title = input("What would you like the name of your main civilization to be? ")
-age = int(input("Please enter the approx. age of civilization of main plot" + between1 + "3000]"))
-amt_cult = int(input("How many cultures can you see yourself keeping track of?" + greater1 + "6]"))
-agression = int(input(scale1 + " pacifists, how likely is the main culture to praise fighting arts?"))
-agriculture = float(input(percentage1 + "population would NOT be rural/agriculturally focused?" + percentage2))
-theology = int(input("Enter the number of gods for the main culture: " + greater1 + "7]"))
-scholars = int(input(scale1 + " trump supporters, how likely is the main culture to value education?"))
-water = int(input(scale1 + " landlocked, about how much of your main civilization's borders are coastline?"))
-
-# Sprint 2
-# Colors Repository
-#  Used https://www.rapidtables.com/ to find colors decimal code
-red = (200, 0, 0)
-darkBlue = (0, 0, 139)
-lightBlue = (176, 224, 230)
-peach = (255, 127, 80)
-lime = (0, 255, 0)
-sangria = (220, 15, 55)
-orange = (255, 140, 0)
-mahogany = (160, 82, 45)
-darkGreen = (0, 100, 0)
-paleGreen = (152, 251, 152)
-palePurple = (200, 112, 147)
-darkBrown = (120, 49, 15)
-yellow = (255, 215, 0)
-ultramarine = (30, 144, 255)
-silver = (192, 192, 192)
-black = (0, 0, 0)
-
-#  Value creation to establish what text is selected (System not fully designed yet)
-colors = (65 - water) / 3  # - is subtraction, / is division
-ares_v_athena_effect = agression // scholars  # Floor division to get lower(when rounding) whole number answer
-sails_v_plows = water // agriculture  # Floor division to get lower(when rounding) whole number answer
-pirates_v_navy = agression * theology // 1  # Multiplication, I used floor divison with 1 to get a whole number
-size = amt_cult // (water * agriculture)
-ego = age ** size  # The ** is x to the y power x**y
-monsters = (666 + theology) % 7  # + is addition, % is called the modulus it returns the remainder from division
-familiar = 4 + agression
-size += 1  # Will take variable add 1 and then return the new value under the same variable
-holy = "mol" + "e" * 2
-
-# Conditional Statements Value Creation for attribute picking
-#  Basic Color Pick and Culture Selection
-# if-elif-else, once one becomes true the others will not be executed but if none are true else will execute
-if colors >= 21 or ares_v_athena_effect == 150:
-    finalColor = darkGreen
-elif 20 >= colors > 19.75 and sails_v_plows < 2:
-    finalColor = red
-elif 19.75 >= colors > 19.5:
-    finalColor = peach
-elif 19.5 >= colors > 19.25:
-    finalColor = paleGreen
-elif 19.25 >= colors > 19:
-    finalColor = sangria
-elif 19 >= colors > 18.75:
-    finalColor = ultramarine
-else:
-    finalColor = yellow
-
-# God Selection
-# if, if true then code will execute
-if pirates_v_navy >= 100:
-    x = 2
-if size >= 100:
-    x = 3
-# Miscellaeneous
-# if-elif, once a statement works it does not execute following statements
-if monsters >= 100:
-    terrible = 'Arachnids'
-elif monsters >= 2:
-    terrible = 'Cannibals'
-elif monsters >= 1:
-    terrible = 'Sentient Plants'
-# if-else, if is true then if executes otherwise else is executed
-if familiar >= 100:
-    witchFriend = 'Dragon'
-else:
-    witchFriend = 'Feline'
-
-#  Not And Or
-# Both must be true
-if witchFriend == 'Dragon' and finalColor == yellow:
-    model = 'emperordragon'
-# One must be true and one must not
-if witchFriend == 'Feline' and not finalColor == sangria:
-    model = 'notboozycats'
-# Either being true will make it true
-if witchFriend == 'Dragon' or finalColor == darkGreen:
-    thisis = 'AlexFavorite'
+finalFile = open(str(title) + ".txt", 'a')
 
 
-#  While For Range In
-#  While loops work while the statement within remains true
-whilecounter = 0
-while whilecounter < 2:
-    whilecounter += 2
-    print('Come and stay awhile by the fire good sir')
-#  For loops work as many times as specified in range
-#  Range starts at 0 and will not include the last value example Range(7)=(0 thru 6)
-for booty in range(7):
-    booty += 4
-    print(booty)
+def repository():
+    """ Retrieve text from file"""
+    textrepository = open("IntegrationProjectTextRepository.txt", "r")
+    # Culture Text Variables
+    cult11 = ""
+    cult21 = ""
+    cult31 = ""
+    cult41 = ""
+    cult51 = ""
+    for x in range(40):
+        read = textrepository.readline()
+        if 0 < x < 9:
+            cult11 += read
+        elif 9 < x < 17:
+            cult21 += read
+        elif 17 < x < 22:
+            cult31 += read
+        elif 22 < x < 33:
+            cult41 += read
+        elif 33 < x < 40:
+            cult51 += read
+    x = cult11, cult21, cult31, cult41, cult51
+    return x
 
 
-# Playing with functions and files
-# Function with Parameters
-# a and b are parameters, ego and size are arguments, c would be the output
-def tired(a, b):
-    c = (a + b) ** 2
-    print(c)
+cult1 = repository()[0]
+cult2 = repository()[1]
+cult3 = repository()[2]
+cult4 = repository()[3]
+cult5 = repository()[4]
 
 
-tired(ego, size)
+def afterblockinput():
+    """ Ask user for input """
+    amtverify = 0
+    amt_cult1 = ""
+    agressionverify = 0
+    agression1 = ""
+    agricultverify = 0
+    agriculture1 = ""
+    theologyverify = 0
+    theology1 = ""
+    scholarsverify = 0
+    scholars1 = ""
+    waterverify = 0
+    water1 = ""
+    while amtverify == 0:
+        amt_cult1 = input("With a number between 0 and 3, "
+                          "please indicate the number of neighboring countries: ")
+        if amt_cult1.isdigit() and -1 < int(amt_cult1) < 4:
+            amtverify = 1
+            amt_cult1 = int(amt_cult1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+
+    while agressionverify == 0:
+        agression1 = input(scale1 + "the violence of your civilization"
+                           + scale2 + "pacifists" + scale3 + "war hungry: ")
+        if agression1.isdigit() and 0 < int(agression1) < 6:
+            agressionverify = 1
+            agression1 = int(agression1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+
+    while agricultverify == 0:
+        agriculture1 = input(
+            scale1 + "the ruralness of your country"
+            + scale2 + "mostly urban areas" + scale3 + "mostly farms: ")
+        if agriculture1.isdigit() and 0 < int(agriculture1) < 6:
+            agricultverify = 1
+            agriculture1 = int(agriculture1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+
+    while theologyverify == 0:
+        theology1 = input("With a number between 0 and 3, Please indicate "
+                          "the "
+                          "number of gods for your civilization: ")
+        if theology1.isdigit() and -1 < int(theology1) < 4:
+            theologyverify = 1
+            theology1 = int(theology1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+
+    while scholarsverify == 0:
+        stext1 = "the value of education in your civilization"
+        scholars1 = input(scale1 + stext1 + scale2 + "trump-supporters" + scale3
+                          + "scientists: ")
+        if scholars1.isdigit() and 0 < int(scholars1) < 6:
+            scholarsverify = 1
+            scholars1 = int(scholars1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+
+    while waterverify == 0:
+        water1 = input(scale1 + "how much of the country's borders "
+                                "are coastline"
+                       + scale2 + "landlocked" + scale3 + "island: ")
+        if water1.isdigit() and 0 < int(water1) < 6:
+            waterverify = 1
+            water1 = int(water1)
+        else:
+            print("Your input was not in the correct format. Please try again"
+                  " :)")
+    x = amt_cult1, agression1, agriculture1, theology1, scholars1, water1
+    return x
 
 
-# Function without parameters will just execute when called
-def fileboi():
-    outcometext = open("Scripture.txt", 'a')
-    outcometext.write("Holy Moly")
-    outcometext.close()
-    print("Your world is complete! Open Scripture and take a look ...")
+a = afterblockinput()[:]
+amt_cult = a[0]
+agression = a[1]
+agriculture = a[2]
+theology = a[3]
+scholars = a[4]
+water = a[5]
 
 
-fileboi()
-# Playing with images
-# filename = "MapDisplay.png"
-# fnt = ImageFont.truetype('advanced_pixel-7.ttf', 12)
-# image = Image.new('RGB', size=(500, 500), color=(0, 100, 0))
-# draw = ImageDraw.Draw(image)
-# draw.text((10, 10), "I DID IT!", font=fnt, fill=(255, 255, 0))
-# image.save(filename)
-# os.system(filename)
-# # a.save('MapDisplay')
-# a = Image.open("dragon.jpg")
-# a.show()
+def afterblockvcreation(agression2, agriculture2, scholars2, water2,
+                        theology2):
+    """Work with input numbers"""
+    #  Value creation to establish what text is selected for main
+    weapon01 = (agression2 ** 2) / 3 // 1
+    # Used **, /, and //. **2 will raise the variable to the second power
+    # /3 will divide the resulting value by three
+    # //1 is a floor dividor meaning it will round the answer down
+    monster01 = (agriculture2 * 3)
+    # *3 will multiply by 3
+    culture01 = scholars2
+    # 2789 % ((9 * scholars) - 2)
+    # -2 will subtract 2 and % will return the remainder
+    # from the division of the 2 numbers it is between
+    country01 = water2
+    familiar01 = theology2 + 3
+    # +3 is addition
+    # text selection based off of values for main
+    x = weapon01, monster01, culture01, country01, familiar01
+    return x
+
+
+c = afterblockvcreation(agression, agriculture, scholars, water, theology)[:]
+weapon0 = c[0]
+monster0 = c[1]
+culture0 = c[2]
+country0 = c[3]
+familiar0 = c[4]
+
+
+def valuechoice(weapon02, monster02, culture02, familiar02, country02,
+                cult12, cult22, cult32, cult42, cult52, theology3):
+    """Choose text bites"""
+    weapontext1 = ""
+    monstertext1 = ""
+    culturetext1 = ""
+    familiartext1 = ""
+    countrytext1 = ""
+    if weapon02 == 0:
+        weapontext1 = " is the bow."
+    elif weapon02 == 1:
+        weapontext1 = " are spears."
+    elif weapon02 == 3:
+        weapontext1 = " is the sword."
+    elif weapon02 == 5:
+        weapontext1 = " is the axe."
+    elif weapon02 == 8:
+        weapontext1 = " are knives."
+
+    if monster02 == 3:
+        monstertext1 = "cannibals."
+    elif monster02 == 6:
+        monstertext1 = "sentient animals."
+    elif monster02 == 9:
+        monstertext1 = "arachnids."
+    elif monster02 == 12:
+        monstertext1 = "flesh-eating insects."
+    elif monster02 == 15:
+        monstertext1 = "carnivorous plants."
+
+    if culture02 == 3 and theology3 == 0:
+        culturetext1 = " " + cult12
+    elif culture02 == 2 and theology3 > 0:
+        culturetext1 = " " + cult22
+    elif culture02 == 4 or culture02 == 3:
+        culturetext1 = " " + cult32
+    elif culture02 == 5:
+        culturetext1 = " " + cult42
+    elif culture02 == 1 or culture02 == 2:
+        culturetext1 = " " + cult52
+
+    if familiar02 == 3:
+        familiartext1 = "reptiles."
+    elif familiar02 == 4:
+        familiartext1 = "felines."
+    elif familiar02 == 5:
+        familiartext1 = "dragons."
+    elif familiar02 == 6:
+        familiartext1 = "canines."
+    elif familiar02 == 6 and weapon0 <= 4:
+        familiartext1 = "birds."
+
+    if country02 == 1:
+        countrytext1 = "Switzerland"
+    elif country02 == 2:
+        countrytext1 = "Romania"
+    elif country02 == 3:
+        countrytext1 = "Portugal"
+    elif country02 == 4:
+        countrytext1 = "Chile"
+    elif country02 == 5:
+        countrytext1 = "Madagascar"
+
+    x = weapontext1, monstertext1, culturetext1, familiartext1, countrytext1
+    return x
+
+
+b = valuechoice(weapon0, monster0, culture0, familiar0, country0, cult1, cult2, cult3,
+                cult4, cult5, theology)[:]
+
+weapontext = b[0]
+monstertext = b[1]
+culturetext = b[2]
+familiartext = b[3]
+countrytext = b[4]
+
+
+def godtext(culturetext2, cult14, cult24, cult34, cult44, cult54):
+    """Structure god text"""
+    god1 = "God of Laughter and Delight"
+    god2 = "God of Wine and the Harvest"
+    god3 = "God of Charm and Wickedness"
+    god4 = "God of Justice"
+    god5 = "God of the Planets and the Sky"
+    finalgod1 = ""
+    finalgod2 = ""
+    finalgod3 = ""
+    reducegod1 = "They honor the "
+    gtext1 = ""
+    if culturetext2 == " " + cult24:
+        finalgod1 = god2
+        finalgod2 = god3
+        finalgod3 = god1
+    if culturetext2 == " " + cult34:
+        finalgod1 = god4
+        finalgod2 = god3
+        finalgod3 = god5
+    if culturetext2 == " " + cult44:
+        finalgod1 = god3
+        finalgod2 = god5
+        finalgod3 = god2
+    if culturetext2 == " " + cult54:
+        finalgod1 = god2
+        finalgod2 = god4
+        finalgod3 = god1
+    if culturetext2 == " " + cult14:
+        gtext1 = ""
+    else:
+        if culturetext == " " + cult24:
+            reducegod1 = "They also honor the "
+        if theology == 0:
+            gtext1 = "They honor no god.\n"
+        if theology == 1:
+            gtext1 = reducegod1 + finalgod1 + ". \n"
+        if theology == 2:
+            gtext1 = reducegod1 + finalgod1 + " and the " + finalgod2 + ". \n"
+        if theology == 3:
+            gtext1 = reducegod1 + finalgod1 + ", the" + finalgod2 \
+                     + ", and the" + finalgod3 + ". \n"
+
+    x = gtext1, finalgod1, finalgod2, finalgod3
+    return x
+
+
+gtext = godtext(culturetext, cult1, cult2, cult3, cult4, cult5)[0]
+
+
+def neighbortext(culturetext3, amt_cult3, cult15, cult25, cult35,
+                 cult45, cult55):
+    """Structure the neighbor text"""
+    neighbor1 = ""
+    neighbor2 = ""
+    neighbor3 = ""
+    n1 = "Their closest neighbor is "
+    n2 = "Their second neighbor is "
+    n3 = "Their third neighbor is "
+    ntext1 = ""
+
+    if culturetext3 == " " + cult15:
+        neighbor1 = n1 + "Darar. The " + cult35
+        neighbor2 = n2 + "Kalen. The " + cult45
+        neighbor3 = n3 + "Diniel. The " + cult55
+
+    if culturetext3 == " " + cult25:
+        neighbor1 = n1 + "Daren. The " + cult35
+        neighbor2 = n2 + "Kaliel. The " + cult15
+        neighbor3 = n3 + "Dinar. The " + cult45
+
+    if culturetext3 == " " + cult35:
+        neighbor1 = n1 + "Dariel. The " + cult4
+        neighbor2 = n2 + "Kalar. The " + cult2
+        neighbor3 = n3 + "Dinen. The " + cult5
+
+    if culturetext3 == " " + cult45:
+        neighbor1 = n1 + "Ardan. The " + cult2
+        neighbor2 = n2 + "Enkal. The " + cult5
+        neighbor3 = n3 + "Latar. The " + cult1
+
+    if culturetext3 == " " + cult55:
+        neighbor1 = n1 + "Endar. The " + cult1
+        neighbor2 = n2 + "Arkal. The " + cult4
+        neighbor3 = n3 + "Entiel. The " + cult5
+
+    if amt_cult3 == 0:
+        ntext1 = ""
+    elif amt_cult3 == 1:
+        ntext1 = neighbor1
+    elif amt_cult3 == 2:
+        ntext1 = neighbor1 + neighbor2
+    elif amt_cult3 == 3:
+        ntext1 = neighbor1 + neighbor2 + neighbor3
+    x = ntext1
+    return x
+
+
+ntext = neighbortext(culturetext, amt_cult, cult1, cult2, cult3, cult4, cult5)
+# Write information to Final File
+
+finalw = "The favored weapon of this people" + weapontext + "\n"
+finalf = "Their companions are most often " + familiartext + "\n"
+finalm = "The local battles are with " + monstertext + "\n"
+finalc = "The country's borders loosely resemble " + countrytext + "'s.\n"
+finaltotaltext = title + culturetext + gtext + finalw + finalf \
+                 + finalm + finalc + ntext
+
+finalFile.write(finaltotaltext)
+
+# Close Final File
+finalFile.close()
+print("The file for your civilization bears its name. Enjoy!")
